@@ -42,9 +42,9 @@ def dump_nss_keys(tls_session):
                     'CLIENT_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_handshake_traffic_secret'].hex(),
                     'CLIENT_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['client_traffic_secrets'][0].hex(),
                     }
-
+        
     nss_file = conf.tls_nss_filename
-    with open(nss_file, 'w+') as f:
+    with open(nss_file, 'a') as f:
         for key, value in nss_keys.items():
             f.write(f"{key} {client_random} {value}\n")
 
