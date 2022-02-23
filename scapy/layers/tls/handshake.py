@@ -57,7 +57,7 @@ from scapy.layers.tls.keyexchange import (_TLSSignature, _TLSServerParamsField,
                                           SigAndHashAlgsField, _tls_hash_sig,
                                           SigAndHashAlgsLenField)
 from scapy.layers.tls.session import (_GenericTLSSessionInheritance,
-                                      readConnState, writeConnState)
+                                      readConnState, writeConnState, dump_nss_keys)
 from scapy.layers.tls.keyexchange_tls13 import TLS_Ext_PreSharedKey_CH
 from scapy.layers.tls.crypto.compression import (_tls_compression_algs,
                                                  _tls_compression_algs_cls,
@@ -1409,6 +1409,12 @@ class TLSFinished(_TLSHandshake):
             elif s.connection_end == "client":
                 s.compute_tls13_traffic_secrets_end()
                 s.compute_tls13_resumption_secret()
+        
+        # at this point we should have derived all secrets.
+        if conf.dump_nss_keys:
+            dump_nss_keys(self.tls_session)
+
+        
 
     def post_dissection_tls_session_update(self, msg_str):
         self.tls_session_update(msg_str)

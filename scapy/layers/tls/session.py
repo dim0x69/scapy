@@ -28,6 +28,27 @@ from scapy.layers.tls.crypto.prf import PRF
 # Typing imports
 from scapy.compat import Dict
 
+def dump_nss_keys(tls_session):
+    tls_version = tls_session.advertised_tls_version
+    
+    client_random = tls_session.client_random.hex()
+
+    if tls_version == 772: # TLSv1.3
+        nss_keys = {'CLIENT_EARLY_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_early_traffic_secret'].hex(),
+                    'EXPORTER_SECRET': tls_session.tls13_derived_secrets['exporter_secret'].hex(),
+                    'SERVER_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['server_handshake_traffic_secret'].hex(),
+                    'EARLY_EXPORTER_SECRET': tls_session.tls13_derived_secrets['early_exporter_secret'].hex(),
+                    'SERVER_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['server_traffic_secrets'][0].hex(),
+                    'CLIENT_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_handshake_traffic_secret'].hex(),
+                    'CLIENT_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['client_traffic_secrets'][0].hex(),
+                    }
+    elif tls_version in (769, 770, 771): # TLSv1.0, TLSv1.1, TLSv1.2
+        nss_keys = {'CLIENT_RANDOM': tls_session.master_secret.hex()}
+
+    nss_file = conf.tls_nss_filename
+    with open(nss_file, 'a') as f:
+        for key, value in nss_keys.items():
+            f.write(f"{key} {client_random} {value}\n")
 
 def load_nss_keys(filename):
     # type: (str) -> Dict[str, bytes]
@@ -1184,3 +1205,4 @@ conf.tls_verbose = False
 conf.tls_nss_filename = None
 # Dictionary containing parsed NSS Keys
 conf.tls_nss_keys = None
+conf.dump_nss_keys = None
