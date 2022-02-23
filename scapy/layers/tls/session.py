@@ -42,7 +42,9 @@ def dump_nss_keys(tls_session):
                     'CLIENT_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_handshake_traffic_secret'].hex(),
                     'CLIENT_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['client_traffic_secrets'][0].hex(),
                     }
-        
+    elif tls_version in (769, 770, 771): # TLSv1.0, TLSv1.1, TLSv1.2
+        nss_keys = {'CLIENT_RANDOM': tls_session.master_secret.hex()}
+
     nss_file = conf.tls_nss_filename
     with open(nss_file, 'a') as f:
         for key, value in nss_keys.items():
