@@ -34,8 +34,10 @@ def dump_nss_keys(tls_session):
     client_random = tls_session.client_random.hex()
 
     if tls_version == 772: # TLSv1.3
-        nss_keys = {'SERVER_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['server_handshake_traffic_secret'].hex(),
+        nss_keys = {'CLIENT_EARLY_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_early_traffic_secret'].hex(),
                     'EXPORTER_SECRET': tls_session.tls13_derived_secrets['exporter_secret'].hex(),
+                    'SERVER_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['server_handshake_traffic_secret'].hex(),
+                    'EARLY_EXPORTER_SECRET': tls_session.tls13_derived_secrets['early_exporter_secret'].hex(),
                     'SERVER_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['server_traffic_secrets'][0].hex(),
                     'CLIENT_HANDSHAKE_TRAFFIC_SECRET': tls_session.tls13_derived_secrets['client_handshake_traffic_secret'].hex(),
                     'CLIENT_TRAFFIC_SECRET_0': tls_session.tls13_derived_secrets['client_traffic_secrets'][0].hex(),
