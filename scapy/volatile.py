@@ -1,9 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
 # Copyright (C) Michael Farrell <micolous+git@gmail.com>
 # Copyright (C) Gauthier Sebaux
-# This program is published under a GPLv2 license
 
 """
 Fields that hold random numbers.
@@ -22,7 +22,7 @@ import string
 from scapy.base_classes import Net
 from scapy.compat import bytes_encode, chb, plain_str
 from scapy.utils import corrupt_bits, corrupt_bytes
-from scapy.modules.six.moves import zip_longest
+from scapy.libs.six.moves import zip_longest
 
 from scapy.compat import (
     List,

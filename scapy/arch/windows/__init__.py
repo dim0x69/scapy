@@ -1,8 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) Philippe Biondi <phil@secdev.org>
-# Copyright (C) Gabriel Potter <gabriel@potter.fr>
-# This program is published under a GPLv2 license
+# See https://scapy.net/ for more information
+# Copyright (C) Gabriel Potter <gabriel[]potter[]fr>
 
 """
 Customizations needed to support Microsoft Windows.
@@ -36,8 +35,8 @@ from scapy.pton_ntop import inet_ntop, inet_pton
 from scapy.utils import atol, itom, mac2str, str2mac
 from scapy.utils6 import construct_source_candidate_set, in6_getscope
 from scapy.data import ARPHDR_ETHER, load_manuf
-import scapy.modules.six as six
-from scapy.modules.six.moves import input, winreg
+import scapy.libs.six as six
+from scapy.libs.six.moves import input, winreg
 from scapy.compat import plain_str
 from scapy.supersocket import SuperSocket
 
@@ -834,7 +833,7 @@ def _append_route6(routes, dpref, dp, nh, iface, lifaddr, metric):
         cset = construct_source_candidate_set(dpref, dp, devaddrs)
     if not cset:
         return
-    # APPEND (DESTINATION, NETMASK, NEXT HOP, IFACE, CANDIDATS, METRIC)
+    # APPEND (DESTINATION, NETMASK, NEXT HOP, IFACE, CANDIDATES, METRIC)
     routes.append((dpref, dp, nh, iface, cset, metric))
 
 

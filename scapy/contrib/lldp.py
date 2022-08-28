@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# This file is part of Scapy
+# See https://scapy.net/ for more information
+
 # scapy.contrib.description = Link Layer Discovery Protocol (LLDP)
 # scapy.contrib.status = loads
 
@@ -6,17 +10,6 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     :author:    Thomas Tannhaeuser, hecke@naberius.de
-    :license:   GPLv2
-
-        This module is free software; you can redistribute it and/or
-        modify it under the terms of the GNU General Public License
-        as published by the Free Software Foundation; either version 2
-        of the License, or (at your option) any later version.
-
-        This module is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
 
     :description:
 
@@ -51,7 +44,6 @@ from scapy.fields import MACField, IPField, BitField, \
     ShortField, XStrLenField, ByteField, ConditionalField, \
     MultipleTypeField
 from scapy.packet import Packet, bind_layers
-from scapy.modules.six.moves import range
 from scapy.data import ETHER_TYPES
 from scapy.compat import orb
 
@@ -106,7 +98,6 @@ class LLDPDU(Packet):
         0x06: 'system description',
         0x07: 'system capabilities',
         0x08: 'management address',
-        range(0x09, 0x7e): 'reserved - future standardization',
         127: 'organisation specific TLV'
     }
 
@@ -265,7 +256,7 @@ class LLDPDU(Packet):
         super(LLDPDU, self).dissection_done(pkt)
 
     def _check(self):
-        """Overwrited by LLDPU objects"""
+        """Overwritten by LLDPU objects"""
         pass
 
     def post_dissect(self, s):
@@ -302,7 +293,6 @@ class LLDPDUChassisID(LLDPDU):
         0x05: 'network address',
         0x06: 'interface name',
         0x07: 'locally assigned',
-        range(0x08, 0xff): 'reserved'
     }
 
     SUBTYPE_RESERVED = 0x00
@@ -358,7 +348,6 @@ class LLDPDUPortID(LLDPDU):
         0x05: 'interface name',
         0x06: 'agent circuit ID',
         0x07: 'locally assigned',
-        range(0x08, 0xff): 'reserved'
     }
 
     SUBTYPE_RESERVED = 0x00

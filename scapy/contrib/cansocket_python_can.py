@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Nils Weiss <nils@we155.de>
-# This program is published under a GPLv2 license
 
 # scapy.contrib.description = python-can CANSocket
 # scapy.contrib.status = loads
@@ -23,7 +23,7 @@ from scapy.layers.can import CAN
 from scapy.packet import Packet
 from scapy.error import warning
 from scapy.compat import List, Type, Tuple, Dict, Any, Optional, cast
-from scapy.modules.six.moves import queue
+from scapy.libs.six.moves import queue
 
 from can import Message as can_Message
 from can import CanError as can_CanError

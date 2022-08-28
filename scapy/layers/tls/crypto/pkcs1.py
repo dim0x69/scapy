@@ -1,7 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2008 Arnaud Ebalard <arno@natisbad.org>
 #   2015, 2016, 2017 Maxence Tury <maxence.tury@ssi.gouv.fr>
-# This program is published under a GPLv2 license
 
 """
 PKCS #1 methods as defined in RFC 3447.
@@ -13,7 +14,7 @@ Ubuntu or OSX. This is why we reluctantly keep some legacy crypto here.
 
 from __future__ import absolute_import
 from scapy.compat import bytes_encode, hex_bytes, bytes_hex
-import scapy.modules.six as six
+import scapy.libs.six as six
 
 from scapy.config import conf, crypto_validator
 from scapy.error import warning

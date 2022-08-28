@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 Customization for the Solaris operation system.
@@ -24,6 +24,7 @@ from scapy.arch.common import get_if_raw_hwaddr  # noqa: F401, F403, E402
 
 
 def get_working_if():
+    # type: () -> str
     """Return an interface that works"""
     try:
         # return the interface associated with the route with smallest

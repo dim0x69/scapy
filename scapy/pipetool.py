@@ -1,13 +1,13 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 from __future__ import print_function
 import os
 import subprocess
 import time
-import scapy.modules.six as six
+import scapy.libs.six as six
 from threading import Lock, Thread
 
 from scapy.automaton import (
