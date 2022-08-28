@@ -814,6 +814,7 @@ class _ASN1CertLenField(FieldLenField):
     """
     This is mostly a 3-byte FieldLenField.
     """
+
     def __init__(self, name, default, length_of=None, adjust=lambda pkt, x: x):
         self.length_of = length_of
         self.adjust = adjust
@@ -1410,12 +1411,10 @@ class TLSFinished(_TLSHandshake):
             elif s.connection_end == "client":
                 s.compute_tls13_traffic_secrets_end()
                 s.compute_tls13_resumption_secret()
-        
+
         # at this point we should have derived all secrets.
         if conf.dump_nss_keys:
             dump_nss_keys(self.tls_session)
-
-        
 
     def post_dissection_tls_session_update(self, msg_str):
         self.tls_session_update(msg_str)
